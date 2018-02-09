@@ -33,7 +33,7 @@ public class Personne
         setName(name);
         setFirstname(firstname);
         setSex(sex);
-        setBirthDate(yearOfBirth,monthOfBirth,dayOfBirth);
+        setBirthDate(yearOfBirth,monthOfBirth-1,dayOfBirth);
     }
 
     public String toString(){return name+" "+firstname;}
