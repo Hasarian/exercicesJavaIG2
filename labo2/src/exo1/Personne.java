@@ -1,6 +1,7 @@
 package exo1;
 
 import java.util.GregorianCalendar;
+import java.lang.String;
 
 public class Personne
 {
@@ -17,7 +18,7 @@ public class Personne
         private void setSex(char sexInitialLetter)throws sexeException
         {
             sexInitialLetter=sexInitialLetter.toUpperCase();
-            if(sexInitialLetter!='M'&&sexInitialLetter!='F') throw new sexeException;
+            if(sexInitialLetter!='M'&&sexInitialLetter!='F') throw new sexeException();
             sex=sexInitialLetter;
         }
 

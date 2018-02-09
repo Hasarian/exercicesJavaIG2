@@ -1,5 +1,6 @@
 package exo1;
 
+import java.lang.String;
 public class Student extends Personne
 {
     private static String[] branches;
@@ -12,22 +13,22 @@ public class Student extends Personne
         public String getBranch(){return branch;}
         private void setBranch(String branch)throws branchException
         {
-            branch=branch.toLowerCase()
+            branch=branch.toLowerCase();
             if(isLegitBranch(branch))this.branch=branch;
-            else {throw new branchException;}
+            else {throw new branchException();}
         }
 
     private int yearOfStudy;
-        public int getYearOfStudy(){return yearOfStudy};
+        public int getYearOfStudy(){return yearOfStudy;}
         private void setYearOfStudy(int yearOfStudy)throws yearException
         {
-            if(yearOfStudy<1||yearOfStudy>3) throw  new yearException;
+            if(yearOfStudy<1||yearOfStudy>3) throw  new yearException();
             this.yearOfStudy=yearOfStudy;
         }
 
     public Student(String name,String firstname,char sex,int dayOfBirth,int monthOfBirth,int yearOfBirth,String branch,int yearOfStudy) throws yearException,branchException,sexeException
     {
-        super(name,firstname,sex,dayOfBirth,monthOfBirth,yearOfBirth)
+        super(name,firstname,sex,dayOfBirth,monthOfBirth,yearOfBirth);
         setBranch(branch);
         setYearOfStudy(yearOfStudy);
     }
@@ -35,8 +36,8 @@ public class Student extends Personne
     public String toString()
     {
         String description=super.toString();
-        description+=" est inscrit"+?(super.getSex()=='M')"":"e";
-        description+=" en "+getYearOfStudy()+(getYearOfStudy()==1)?"ere":"eme";
+        description+=" est inscrit"+((super.getSex()=='M')?"":"e");
+        description+=" en "+getYearOfStudy()+((getYearOfStudy()==1)?"ere":"eme");
         description+=" "+branch;
         return description;
     }
