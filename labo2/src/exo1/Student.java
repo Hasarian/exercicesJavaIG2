@@ -15,14 +15,14 @@ public class Student extends Personne
         {
             branch=branch.toLowerCase();
             if(isLegitBranch(branch))this.branch=branch;
-            else {throw new branchException();}
+            else {throw new branchException(branch);}
         }
 
     private int yearOfStudy;
         public int getYearOfStudy(){return yearOfStudy;}
         private void setYearOfStudy(int yearOfStudy)throws yearException
         {
-            if(yearOfStudy<1||yearOfStudy>3) throw  new yearException();
+            if(yearOfStudy<1||yearOfStudy>3) throw  new yearException(yearOfStudy);
             this.yearOfStudy=yearOfStudy;
         }
 

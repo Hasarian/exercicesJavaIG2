@@ -1,6 +1,6 @@
 package exo1;
 
-import java.io.*;
+import javax.swing.*;
 
 public class Main
 {
@@ -8,12 +8,13 @@ public class Main
         {
             try
             {
-                Student student=new Student("Alibaba","Alakazam",'M',1,1,1985,"market",2);
+                Student student = new Student("Alibaba", "Alakazam", 'N', 1, 1, 1985, "market", 2);
                 System.out.println(student);
             }
-            catch()
+            catch(labo2Exception exception)
             {
-
+                JOptionPane.showMessageDialog(null,exception.getMsg(),"alert",JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
             }
         }
 }
