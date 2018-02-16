@@ -5,7 +5,7 @@ import javax.swing.*;
 public class labo2Exception extends Exception
 {
     private String msg;
-    public String getMsg()
+    public String getMessage()
     {
         return msg;
     }

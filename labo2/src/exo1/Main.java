@@ -13,7 +13,7 @@ public class Main
             }
             catch(labo2Exception exception)
             {
-                JOptionPane.showMessageDialog(null,exception.getMsg(),"alert",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,exception.getMessage(),"alert",JOptionPane.ERROR_MESSAGE);
                 System.exit(0);
             }
         }
