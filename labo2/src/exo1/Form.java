@@ -1,6 +1,7 @@
 package exo1;
 import javax.swing.*;
 import java.awt.*;
+import java.util.GregorianCalendar;
 
 public class Form
 {
@@ -44,7 +45,6 @@ public class Form
             textForm= new JPanel();
             textForm.setBounds(10,80,200,200);
             textForm.setLayout(new GridLayout(2,2,2,3));
-
             nameLabel=new JLabel("family name:");
             textForm.add(nameLabel);
             name=new JTextField();
@@ -62,7 +62,11 @@ public class Form
             birthForm.add(dayOfBirth);
             monthOfBirth=new JComboBox();
             for (int month=1;month<13;month++)monthOfBirth.addItem(month);
-
+            birthForm.add(monthOfBirth);
+            yearOfBirth=new JComboBox();
+            for (int year=1940;year< GregorianCalendar.YEAR;year++) yearOfBirth.addItem(year);
+            birthForm.add(yearOfBirth);
+            this.add(birthForm);
         }
 
     }
