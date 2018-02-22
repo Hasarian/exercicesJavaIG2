@@ -34,7 +34,8 @@ public class Main
         {
             JOptionPane.showMessageDialog(null,fileException.getMessage(),"file error",JOptionPane.ERROR_MESSAGE);
         }
-        finally {
+        finally
+        {
             if (fileOut!=null)
             {
                 try {fileOut.close();}
@@ -44,41 +45,11 @@ public class Main
                 }
             }
         }
+        StudentToRead commonZone=new StudentToRead();
+        ThreadProduct productor=new ThreadProduct(commonZone);
+        ThreadConsume displayer=new ThreadConsume(commonZone);
+        productor.start();
+        displayer.start();
 
-        ObjectInputStream fileIn= null;
-        try
-        {
-            fileIn=new ObjectInputStream(new FileInputStream("students.txt"));
-            Student student=(Student) fileIn.readObject();
-            while(student!=null)
-            {
-                System.out.println(student);
-                student=(Student) fileIn.readObject();
-            }
-        }
-        catch (EOFException eofException)
-        {
-            System.out.println("Plus d'enregistrement");
-        }
-        catch (IOException ioException)
-        {
-            JOptionPane.showMessageDialog(null,"File reading error","file error",JOptionPane.ERROR_MESSAGE);
-        }
-        catch   (Exception exception)
-        {
-            JOptionPane.showMessageDialog(null,"an error occured that isn't related to the opening","unkonwn error",JOptionPane.ERROR_MESSAGE);
-        }
-        finally
-        {
-            if(fileIn!=null)
-            {
-                try{
-                    fileIn.close();
-                }catch(IOException ioexception)
-                {
-                    JOptionPane.showMessageDialog(null,ioexception.getMessage(),"file closing error",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-        }
     }
 }
