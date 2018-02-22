@@ -13,5 +13,9 @@ public class labo3Exception extends Exception
         this.value=value;
 
     }
+    public String getMsg()
+    {
+        return msg+"\n"+"error value: "+value;
+    }
 
 }

@@ -1,8 +1,9 @@
 package labo3;
 
-import java.util.logging.Level;
 
-public class YearOfStudy
+import java.io.Serializable;
+
+public class YearOfStudy implements Serializable
 {
     private String branchLabel;
     public String getBranchLabel(){return branchLabel;}
