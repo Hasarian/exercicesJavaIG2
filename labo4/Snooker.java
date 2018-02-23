@@ -12,14 +12,18 @@ public class Snooker extends JPanel
 
     private List<Side> verticalSides;
 
-    public Snooker()
+    public Snooker(int width,int height)
     {
         this.setLayout(new BorderLayout());
         ArrayList<Side> verticals= new ArrayList<Side>();
         verticalSides= Collections.synchronizedList(verticals);
         try
         {
-            verticalSides.add(new Side(100, 100, 300, 500));
+            int sideWidth=10;
+            verticalSides.add(new Side(100, 100,width,sideWidth ));
+            verticalSides.add(new Side(100+width, 100,sideWidth,height));
+            verticalSides.add(new Side(100, height+90,width,sideWidth));
+            verticalSides.add(new Side(100, 100,sideWidth,height ));
         }catch(Labo4Exception laboExcept)
         {
             JOptionPane.showMessageDialog(null,laboExcept.getMsg(),"Error",JOptionPane.ERROR_MESSAGE);

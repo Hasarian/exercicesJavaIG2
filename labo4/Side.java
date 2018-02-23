@@ -23,6 +23,6 @@ public class Side
 
     public void draw(Graphics g)
     {
-        g.drawRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
+        g.fillRect(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
     }
 }
