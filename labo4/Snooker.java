@@ -11,7 +11,7 @@ public class Snooker extends JPanel
 {
 
     private List<Side> verticalSides;
-
+    private Ball ball;
     public Snooker(int width,int height)
     {
         this.setLayout(new BorderLayout());
@@ -28,11 +28,13 @@ public class Snooker extends JPanel
         {
             JOptionPane.showMessageDialog(null,laboExcept.getMsg(),"Error",JOptionPane.ERROR_MESSAGE);
         }
+        ball=new Ball(this,300,300,15);
     }
 
     public void paint(Graphics g)
     {
         super.paint(g);
         for (Side side:verticalSides) side.draw(g);
+        ball.draw(g);
     }
 }
