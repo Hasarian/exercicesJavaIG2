@@ -15,6 +15,6 @@ public class PointsMeter extends JPanel
     public void paint(Graphics g)
     {
         super.paint(g);
-        g.drawString(new Integer(snooker.getTotalPoints()).toString(),0,0);
+        g.drawString("points:\n"+new Integer(snooker.getTotalPoints()).toString(),600,600);
     }
 }

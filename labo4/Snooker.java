@@ -10,6 +10,8 @@ import java.util.List;
 public class Snooker extends JPanel
 {
     private int totalPoints;
+    private PointsMeter counter;
+    public PointsMeter getCounter(){return counter;}
     public int getTotalPoints(){return  totalPoints;}
     public void addPoints(int points){totalPoints+=points;}
     private List<Side> verticalSides;
@@ -25,6 +27,7 @@ public class Snooker extends JPanel
         totalPoints=0;
         this.width=width;
         this.height=height;
+        counter=new PointsMeter(this);
         this.setLayout(new BorderLayout());
         ArrayList<Side> verticals= new ArrayList<Side>();
         verticalSides= Collections.synchronizedList(verticals);
