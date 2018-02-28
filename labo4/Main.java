@@ -6,6 +6,7 @@ public class Main
 {
     public static void main(String[] args)
     {
-        MainFrame frame= new MainFrame(new Snooker(300,600));
+        Snooker snooker=new Snooker(300,600);
+        new MainFrame(snooker,new PointsMeter(snooker));
     }
 }
