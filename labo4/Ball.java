@@ -21,8 +21,7 @@ public class Ball
         colorReference=0;
         deltaX= (int)Math.random()*100+1;
         deltaY= (int) Math.random()*100+1;
-        ThreadColor threadColor=new ThreadColor(this);
-        threadColor.start();
+
     }
 
     public void draw(Graphics g)

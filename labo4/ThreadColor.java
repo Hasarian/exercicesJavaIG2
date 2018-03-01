@@ -4,17 +4,17 @@ import javax.swing.*;
 
 public class ThreadColor extends Thread
 {
-    Ball ball;
-   public ThreadColor(Ball ball)
+    Snooker snooker;
+   public ThreadColor(Snooker snooker)
    {
        super("carnaval");
-       this.ball=ball;
+       this.snooker=snooker;
    }
    public void run()
    {
        while(true)
        {
-           ball.colorChange();
+           for(Ball ball:snooker.getBalls()) ball.colorChange();
            try
            {
                sleep(1);

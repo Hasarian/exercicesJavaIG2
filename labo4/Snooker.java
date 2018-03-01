@@ -36,6 +36,7 @@ public class Snooker extends JPanel
         horizontalSides= Collections.synchronizedList(horizontals);
         ArrayList<Ball> ballsArray=new ArrayList<Ball>();
         balls=Collections.synchronizedList(ballsArray);
+        ThreadColor threadColor=new ThreadColor(this);
         try
         {
             int sideWidth=10;
@@ -51,6 +52,7 @@ public class Snooker extends JPanel
         //addBall();
         ThreadMove thread=new ThreadMove(this);
         thread.start();
+        threadColor.start();
     }
 
     public void paint(Graphics g)
