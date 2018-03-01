@@ -1,9 +1,11 @@
 package labo4.labo4Frame;
 
+import labo4.ButtonManager;
 import labo4.PointsMeter;
 import labo4.Snooker;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 public class MainFrame extends JFrame
@@ -12,31 +14,19 @@ public class MainFrame extends JFrame
     public MainFrame(Snooker snooker)
     {
         super("Basic snooker");
-        setBounds(100,100,1200,1200);
+        setBounds(100,100,1200,800);
         JSplitPane mainpanel=new JSplitPane();
         mainContainer=this.getContentPane();
-        mainContainer.add(mainpanel);
-        mainpanel.setDividerLocation(700);
+        mainContainer.setLayout(new BorderLayout());
+        mainContainer.add(mainpanel,BorderLayout.CENTER);
+        mainpanel.setDividerLocation(450);
         mainpanel.setDividerSize(0);
         mainpanel.setLeftComponent(snooker);
         mainpanel.setRightComponent(snooker.getCounter());
-        //new PointFrame(pointsMeter);
+
+        mainContainer.add(new ButtonManager(snooker),BorderLayout.SOUTH);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
     }
-    /*private class PointFrame extends JFrame
-    {
-        Container pointContainer;
-
-        public PointFrame(PointsMeter counter)
-        {
-            super("points du \"billard\"");
-            setBounds(300,300,200,200);
-            pointContainer=this.getContentPane();
-            pointContainer.add(counter);
-            setVisible(true);
-        }
-    }*/
-
 
 }

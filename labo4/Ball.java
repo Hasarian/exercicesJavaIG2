@@ -1,24 +1,33 @@
 package labo4;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Ball
 {
+    private static final Color[] colors={Color.BLACK,Color.DARK_GRAY,Color.GRAY,Color.BLUE,Color.GREEN,Color.YELLOW,Color.white};
     private Rectangle rectangle;
     public Rectangle getRectangle(){return rectangle;}
     private Snooker snooker;
-    private int deltaX=5;
-    private int deltaY=5;
+    private int deltaX;
+    private int deltaY;
+    private int colorReference;
 
 
     public Ball(Snooker snooker,int x, int y, int sideLenght)
     {
         this.snooker=snooker;
         rectangle=new Rectangle(x,y,sideLenght,sideLenght);
+        colorReference=0;
+        deltaX= (int)Math.random()*100+1;
+        deltaY= (int) Math.random()*100+1;
+        ThreadColor threadColor=new ThreadColor(this);
+        threadColor.start();
     }
 
     public void draw(Graphics g)
     {
+        g.setColor(colors[colorReference]);
         g.fillOval(rectangle.x,rectangle.y, rectangle.width,rectangle.height);
 
     }
@@ -31,6 +40,7 @@ public class Ball
             {
                 deltaX*=-1;
                 snooker.addPoints(side.getNbPoints());
+                colorChange();
             }
         }
         for (Side side:snooker.getHorizontalSides())
@@ -39,7 +49,25 @@ public class Ball
             {
                 deltaY*=-1;
                 snooker.addPoints(side.getNbPoints());
+                colorChange();
             }
         }
+        for(Ball ball:snooker.getBalls())
+        {
+            if(ball!=this)
+            {
+                if(rectangle.intersects(ball.rectangle))
+                {
+                    int temp=deltaX*2;
+                    deltaX=deltaY/2;
+                    deltaY=temp;
+                }
+            }
+        }
+    }
+    public void colorChange()
+    {
+        if(colorReference<colors.length-1)colorReference++;
+        else colorReference=0;
     }
 }

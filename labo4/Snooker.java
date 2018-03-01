@@ -18,8 +18,10 @@ public class Snooker extends JPanel
     public List<Side> getVerticalSides(){return  verticalSides;}
     private List<Side> horizontalSides;
     public List<Side> getHorizontalSides(){return  horizontalSides;}
-    private Ball ball;
-    public Ball getBall() { return ball; }
+    /*private Ball ball;
+    public Ball getBall() { return ball; }*/
+    private List<Ball> balls;
+    public List<Ball> getBalls(){return balls;}
     private int width;
     private int height;
     public Snooker(int width,int height)
@@ -28,11 +30,12 @@ public class Snooker extends JPanel
         this.width=width;
         this.height=height;
         counter=new PointsMeter(this);
-        this.setLayout(new BorderLayout());
         ArrayList<Side> verticals= new ArrayList<Side>();
         verticalSides= Collections.synchronizedList(verticals);
         ArrayList<Side> horizontals= new ArrayList<Side>();
         horizontalSides= Collections.synchronizedList(horizontals);
+        ArrayList<Ball> ballsArray=new ArrayList<Ball>();
+        balls=Collections.synchronizedList(ballsArray);
         try
         {
             int sideWidth=10;
@@ -45,7 +48,7 @@ public class Snooker extends JPanel
         {
             JOptionPane.showMessageDialog(null,laboExcept.getMsg(),"Error",JOptionPane.ERROR_MESSAGE);
         }
-        ball=new Ball(this,300,300,15);
+        //addBall();
         ThreadMove thread=new ThreadMove(this);
         thread.start();
     }
@@ -55,7 +58,11 @@ public class Snooker extends JPanel
         super.paint(g);
         for (Side side:verticalSides) side.draw(g);
         for(Side side:horizontalSides)side.draw(g);
-        ball.draw(g);
+        for (Ball ball:balls)
+        {
+            ball.draw(g);
+        }
+
     }
 
     private void initObstacles() throws NumberException
@@ -65,14 +72,20 @@ public class Snooker extends JPanel
     }
     private void addHorizontalObstacle(int x, int y, int width,int heigth, int value) throws NumberException
     {
-        horizontalSides.add(new Side(x,y,width,heigth,value));
-        verticalSides.add(new Side(x,y,1,heigth,value*2));
-        verticalSides.add(new Side(x+width,y,1,heigth,value*2));
+        horizontalSides.add(new Side(x,y,width,heigth/2,value));
+        horizontalSides.add(new Side(x,y+heigth/2,width,heigth/2,value));
+        verticalSides.add(new Side(x,y,1,heigth-1,value*2));
+        verticalSides.add(new Side(x+width,y,1,heigth-1,value*2));
     }
     private void addVerticalObstacle(int x, int y, int width, int height, int value)throws NumberException
     {
-        verticalSides.add(new Side(x,y,width,height,value));
-        horizontalSides.add(new Side(x,y,width,1,value*2));
-        horizontalSides.add(new Side(x,y+width,width,1,value*2));
+        verticalSides.add(new Side(x,y,width/2,height,value));
+        verticalSides.add(new Side(x+(width/2),y,width/2,height,value));
+        horizontalSides.add(new Side(x,y,width-1,1,value*2));
+        horizontalSides.add(new Side(x,y+height,width-1,1,value*2));
+    }
+    public void addBall()
+    {
+        balls.add(new Ball(this,120,130,10));
     }
 }

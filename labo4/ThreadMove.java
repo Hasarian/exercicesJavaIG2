@@ -15,7 +15,11 @@ public class ThreadMove extends Thread
     {
         while(true)
         {
-            snooker.getBall().move();
+            for (Ball ball:snooker.getBalls())
+            {
+                ball.move();
+            }
+            //snooker.getBall().move();
             snooker.repaint();
             try {
                 sleep(10);
