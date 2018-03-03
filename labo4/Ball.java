@@ -12,7 +12,8 @@ public class Ball
     private int deltaX;
     private int deltaY;
     private int colorReference;
-
+    private boolean toDelete;
+    public boolean toDelete(){return toDelete;}
 
     public Ball(Snooker snooker,int x, int y, int sideLenght)
     {
@@ -21,6 +22,7 @@ public class Ball
         colorReference=0;
         deltaX= (int)Math.random()*100+1;
         deltaY= (int) Math.random()*100+1;
+        toDelete=false;
 
     }
 
@@ -32,34 +34,30 @@ public class Ball
     }
     public void move()
     {
-        rectangle.add(rectangle.x+=deltaX,rectangle.y+=deltaY);
-        for(Side side:snooker.getVerticalSides())
-        {
-            if(side.collision(this))
-            {
-                deltaX*=-1;
-                snooker.addPoints(side.getNbPoints());
-                colorChange();
+        if(snooker.getTrap().disappear(this)) toDelete=true;
+        else {
+            rectangle.add(rectangle.x += deltaX, rectangle.y += deltaY);
+            for (Side side : snooker.getVerticalSides()) {
+                if (side.collision(this)) {
+                    deltaX *= -1;
+                    snooker.addPoints(side.getNbPoints());
+                    colorChange();
+                }
             }
-        }
-        for (Side side:snooker.getHorizontalSides())
-        {
-            if (side.collision(this))
-            {
-                deltaY*=-1;
-                snooker.addPoints(side.getNbPoints());
-                colorChange();
+            for (Side side : snooker.getHorizontalSides()) {
+                if (side.collision(this)) {
+                    deltaY *= -1;
+                    snooker.addPoints(side.getNbPoints());
+                    colorChange();
+                }
             }
-        }
-        for(Ball ball:snooker.getBalls())
-        {
-            if(ball!=this)
-            {
-                if(rectangle.intersects(ball.rectangle))
-                {
-                    int temp=deltaX*2;
-                    deltaX=deltaY/2;
-                    deltaY=temp;
+            for (Ball ball : snooker.getBalls()) {
+                if (ball != this) {
+                    if (rectangle.intersects(ball.rectangle)) {
+                        int temp = deltaX * 2;
+                        deltaX = deltaY / 2;
+                        deltaY = temp;
+                    }
                 }
             }
         }

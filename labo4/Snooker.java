@@ -24,6 +24,8 @@ public class Snooker extends JPanel
     public List<Ball> getBalls(){return balls;}
     private int width;
     private int height;
+    private Trap trap;
+    public Trap getTrap(){return trap;}
     public Snooker(int width,int height)
     {
         totalPoints=0;
@@ -37,6 +39,7 @@ public class Snooker extends JPanel
         ArrayList<Ball> ballsArray=new ArrayList<Ball>();
         balls=Collections.synchronizedList(ballsArray);
         ThreadColor threadColor=new ThreadColor(this);
+        trap=new Trap(80+width,70+height,30);
         try
         {
             int sideWidth=10;
@@ -58,6 +61,7 @@ public class Snooker extends JPanel
     public void paint(Graphics g)
     {
         super.paint(g);
+        trap.draw(g);
         for (Side side:verticalSides) side.draw(g);
         for(Side side:horizontalSides)side.draw(g);
         for (Ball ball:balls)
@@ -89,5 +93,9 @@ public class Snooker extends JPanel
     public void addBall()
     {
         balls.add(new Ball(this,120,130,10));
+    }
+    public void deleteBall(final ArrayList<Ball> ballsToDelete)
+    {
+        balls.removeAll(ballsToDelete);
     }
 }

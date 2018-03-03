@@ -1,15 +1,18 @@
 package labo4;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ThreadMove extends Thread
 {
     Snooker snooker;
+    ArrayList<Ball> ballsToDelete;
 
     public ThreadMove(Snooker snooker)
     {
         super("the balls are moving");
         this.snooker=snooker;
+        ballsToDelete=new ArrayList<Ball>();
     }
     public void run()
     {
@@ -18,8 +21,9 @@ public class ThreadMove extends Thread
             for (Ball ball:snooker.getBalls())
             {
                 ball.move();
+                if(ball.toDelete())ballsToDelete.add(ball);
             }
-            //snooker.getBall().move();
+            snooker.deleteBall(ballsToDelete);
             snooker.repaint();
             try {
                 sleep(10);
