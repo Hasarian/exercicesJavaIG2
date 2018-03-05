@@ -40,7 +40,7 @@ public class MainFrame extends JFrame
         exit.addActionListener(new ExitListener());
         inscription=new JMenuItem("Inscription");
         iESN=new JMenuItem("IESN");
-        iESN.addActionListener(new ChangePanelListener( new StringPanel("adresse\n téléphone \nsite internet")));
+        iESN.addActionListener(new ChangePanelListener( new IESNpanel()));
         help=new JMenuItem("Help");
         optionMenu.add(exit);
         optionMenu.add(inscription);
@@ -66,8 +66,9 @@ public class MainFrame extends JFrame
         }
         public void actionPerformed(ActionEvent event)
         {
-            container.remove(mainPanel);
+            container.removeAll();
             container.add(newPanel);
+            container.revalidate();
         }
     }
 }
