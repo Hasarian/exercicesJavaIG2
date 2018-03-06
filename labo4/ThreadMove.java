@@ -24,6 +24,7 @@ public class ThreadMove extends Thread
                 if(ball.toDelete())ballsToDelete.add(ball);
             }
             snooker.deleteBall(ballsToDelete);
+            ballsToDelete.removeAll(ballsToDelete);
             snooker.repaint();
             try {
                 sleep(10);
