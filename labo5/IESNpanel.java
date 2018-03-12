@@ -11,7 +11,7 @@ public class IESNpanel extends JPanel
          adresse=new JLabel("<html>    <p>adresse:</p>    <p>Rue Joseph Calozet 19</p><p> 5000 Namur</p></html>");
          tel=new JLabel("tel: +32 81 46 86 10");
          siteInternet= new JLabel("<html><p>site:</p><p>http://www.henallux.be/namur-iesn</p></html>");
-         ImageIcon savedPic=new ImageIcon(".\\iesnImage.jpg");
+         ImageIcon savedPic=new ImageIcon(".\\labo5\\iesnImage.jpg");
          System.out.println(savedPic);
          image=new JLabel("",savedPic,JLabel.CENTER);
          setLayout(new GridBagLayout());
