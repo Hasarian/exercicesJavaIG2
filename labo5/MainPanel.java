@@ -59,7 +59,9 @@ public class MainPanel extends JPanel
             exitButton= new JButton("Quitter");
             exitButton.addActionListener(new CloseEventListener());
             buttonLayout2.add(exitButton);
-            buttonLayout2.add(new JButton("Inscription"));
+            JButton inscriptionButton=new JButton("Inscription");
+            buttonLayout2.add(inscriptionButton);
+            inscriptionButton.addActionListener(new ChangePanelListener(new SubscribeFormPanel()));
             JButton iesnButton=new JButton("IESN");
             buttonLayout2.add(iesnButton);
             iesnButton.addActionListener(new ChangePanelListener(new IESNpanel()));
