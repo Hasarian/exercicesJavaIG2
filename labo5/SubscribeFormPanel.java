@@ -13,47 +13,47 @@ import java.awt.*;
 * */
 public class SubscribeFormPanel extends JPanel
 {
-    private String matricule;
-    public String getMatricule(){return matricule;}
-    private JTextField name,firstName;
+    private static final String[] branches={"technologie de l'informatique",
+                                            "informatique de gestion",
+                                             "comptabilité",
+                                              "marketing",
+                                              "automation",
+                                               "droit",
+                                               "régendat"};
+    private JTextField matricule,firstname,name,birthDate,origin;
+    public String getMatricule(){return matricule.getText();}
+    public String getFirstName(){return firstname.getText();}
     public String getName(){return name.getText();}
-    public String getFirstName(){return firstName.getText();}
-    public SubscribeFormPanel()
+    public String getBirthDate(){return birthDate.getText();}
+    public String getBranch(){return branches[branchNumber()];}
+    public String getOrigin(){return origin.getText();}
+    RadioButton inscriptionKind;
+    JCheckBox boursier,foreigner;
+    public boolean isBoursier(){return boursier.isSelected();}
+    public boolean isForeigner(){return foreigner.isSelected();}
+
+
+    public int branchNumber()
     {
-        super();
-        setLayout(new BorderLayout());
-        add(new FormPanel(),BorderLayout.CENTER);
+        int firstNumber= matricule.getText().charAt(0);
+        if(firstNumber<1||firstNumber>7)
+        {
+            JOptionPane.showMessageDialog(null,"this is not a correct matricule","error",JOptionPane.ERROR_MESSAGE);
+            System.exit(-1);
+        }
+        return firstNumber;
+    }
+
+    private class GeneralInfoForm extends JPanel
+    {
 
     }
-    private class FormPanel extends JPanel
+    private class RadioButton extends JPanel
     {
-        private JLabel nameLabel,firstNameLabel;
-        private FormPanel()
-        {
-            super();
-            nameLabel=new JLabel("family name:");
-            firstNameLabel=new JLabel("first name:");
-            name=new JTextField();
-            firstName=new JTextField();
 
-            setLayout(new GridBagLayout());
-            GridBagConstraints constraints=new GridBagConstraints();
-            constraints.weightx=1;
-            constraints.anchor=GridBagConstraints.LINE_END;
-            constraints.gridx=1;
-            constraints.gridy=1;
-            add(nameLabel,constraints);
-            constraints.gridy++;
-            add(firstNameLabel,constraints);
+    }
+    private class CheckBoxManager
+    {
 
-            constraints.fill=GridBagConstraints.HORIZONTAL;
-            constraints.insets=new Insets(0,0,0,250);
-            constraints.gridx++;
-            constraints.anchor=GridBagConstraints.LINE_START;
-            constraints.gridy=1;
-            add(name,constraints);
-            constraints.gridy++;
-            add(firstName,constraints);
-        }
     }
 }
