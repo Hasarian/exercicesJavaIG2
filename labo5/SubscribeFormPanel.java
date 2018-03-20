@@ -66,16 +66,23 @@ public class SubscribeFormPanel extends JPanel {
 
         centerPanel.add(new GeneralInfoForm());
         //centerPanel.add(new RadioButton());
+        JPanel southPanel=new JPanel();
+        JButton backButton=new JButton("to main menu");
+        JButton confirmButton=new JButton("confirm");
+        southPanel.add(backButton);
+        southPanel.add(confirmButton);
+        add(southPanel,BorderLayout.SOUTH);
     }
 
     public int branchNumber()
     {
         char firstNumber= matricule.getText().charAt(0);
-        System.out.println(firstNumber+"\n"+matricule.getText()+"\n"+matricule.getText().charAt(0));
+       // System.out.println(firstNumber+"\n"+matricule.getText()+"\n"+matricule.getText().charAt(0));
         if(firstNumber<'1'||firstNumber>'7')
         {
-            JOptionPane.showMessageDialog(null,"this is not a correct matricule\n"+firstNumber,"error",JOptionPane.ERROR_MESSAGE);
-            System.exit(-1);
+            JOptionPane.showMessageDialog(null,"this is not a correct matricule","error",JOptionPane.ERROR_MESSAGE);
+            matricule.setText("");
+            return -1;
         }
         return Integer.parseInt(""+firstNumber)-1;
     }
@@ -100,8 +107,10 @@ public class SubscribeFormPanel extends JPanel {
             origin=new JTextField();
             branch=new JTextField();
             branch.setEditable(false);
+            boursier=new JCheckBox("boursier");
+            foreigner=new JCheckBox("foreigner");
 
-            setLayout(new GridLayout(7,2));
+            setLayout(new GridLayout(8,2));
 
 
             add(matriculeLabel);
@@ -121,13 +130,18 @@ public class SubscribeFormPanel extends JPanel {
             add(branchLabel);
             add(branch);
 
+            add(boursier);
+            add(foreigner);
+
+
 
         }
         private class matriculeListner implements ActionListener
         {
             @Override
             public void actionPerformed(ActionEvent event) {
-                    branch.setText(branches[branchNumber()]);
+                if(branchNumber()>=0)
+                branch.setText(branches[branchNumber()]);
             }
         }
     }
@@ -166,8 +180,5 @@ public class SubscribeFormPanel extends JPanel {
             }
         }
     }
-    private class CheckBoxManager
-    {
 
-    }
 }
