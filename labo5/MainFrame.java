@@ -45,9 +45,9 @@ public class MainFrame extends JFrame
         exit= new JMenuItem("Quit");
         exit.addActionListener(new ExitListener());
         inscription=new JMenuItem("Inscription");
-        inscription.addActionListener(new ChangePanelListener(new SubscribeFormPanel()));
+        inscription.addActionListener(new ChangePanelListener(new SubscribeFormPanel(mainPanel),container));
         iESN=new JMenuItem("IESN");
-        iESN.addActionListener(new ChangePanelListener( new IESNpanel()));
+        iESN.addActionListener(new ChangePanelListener( new IESNpanel(),container));
         help=new JMenuItem("Help");
         help.addActionListener(new NewFrameListener(new SecondaryFrame(new HelpPanel(),this)));
         optionMenu.add(exit);
@@ -64,7 +64,7 @@ public class MainFrame extends JFrame
             System.exit(0);
         }
     }
-    private class ChangePanelListener implements ActionListener
+   /* private class ChangePanelListener implements ActionListener
     {
         JPanel newPanel;
 
@@ -90,5 +90,5 @@ public class MainFrame extends JFrame
         {
             newFrame.genWindow();
         }
-    }
+    }*/
 }

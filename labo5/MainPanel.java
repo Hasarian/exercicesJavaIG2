@@ -8,16 +8,18 @@ import java.awt.event.ActionListener;
 public class MainPanel extends JPanel
 {
     private int divider;
+    public int getDivider(){return divider;}
     private NorthPanel topPanel;
     private CenterPanel midPanel;
     private Container container;
+    public Container getContainer(){return container;}
 
     public MainPanel(int divider,Container container)
     {
         this.container=container;
        this.divider=divider;
        topPanel=new NorthPanel();
-       midPanel= new CenterPanel();
+       midPanel= new CenterPanel(this);
        setLayout(new BorderLayout());
        add(topPanel,BorderLayout.NORTH);
        add(midPanel,BorderLayout.CENTER);
@@ -25,18 +27,18 @@ public class MainPanel extends JPanel
     }
     private class NorthPanel extends JSplitPane
     {
-        private StringPanel panel1;
-        private StringPanel panel2;
+        private JLabel label1;
+        private JLabel label2;
 
         private NorthPanel()
         {
             super();
             setDividerLocation(divider);
             setDividerSize(0);
-            panel1=new StringPanel("Menus");
-            panel2=new StringPanel("Options de menu");
-            setLeftComponent(panel1);
-            setRightComponent(panel2);
+            label1=new JLabel("Menus");
+            label2=new JLabel("Options de menu");
+            setLeftComponent(label1);
+            setRightComponent(label2);
         }
     }
     private class CenterPanel extends JSplitPane
@@ -44,7 +46,7 @@ public class MainPanel extends JPanel
         private JPanel buttonLayout1;
         private JPanel buttonLayout2;
         private JButton exitButton;
-        private CenterPanel()
+        private CenterPanel(MainPanel mainpanel)
         {
            super();
            setDividerLocation(divider);
@@ -61,10 +63,10 @@ public class MainPanel extends JPanel
             buttonLayout2.add(exitButton);
             JButton inscriptionButton=new JButton("Inscription");
             buttonLayout2.add(inscriptionButton);
-            inscriptionButton.addActionListener(new ChangePanelListener(new SubscribeFormPanel()));
+            inscriptionButton.addActionListener(new ChangePanelListener(new SubscribeFormPanel(mainpanel),container));
             JButton iesnButton=new JButton("IESN");
             buttonLayout2.add(iesnButton);
-            iesnButton.addActionListener(new ChangePanelListener(new IESNpanel()));
+            iesnButton.addActionListener(new ChangePanelListener(new IESNpanel(),container));
             buttonLayout2.add(new JButton("aide"));
            setLeftComponent(buttonLayout1);
            setRightComponent(buttonLayout2);
@@ -77,32 +79,7 @@ public class MainPanel extends JPanel
             }
             public CloseEventListener(){}
         }
-        private class ChangePanelListener implements ActionListener
-        {
-            JPanel newPanel;
 
-            private ChangePanelListener(JPanel newPanel)
-            {
-                this.newPanel=newPanel;
-            }
-            public void actionPerformed(ActionEvent event)
-            {
-                container.removeAll();
-                container.add(newPanel);
-                container.revalidate();
-            }
-        }
-        private class NewFrameListener implements  ActionListener
-        {
-            SecondaryFrame newFrame;
-            private NewFrameListener(SecondaryFrame newFrame)
-            {
-                this.newFrame=newFrame;
-            }
-            public void actionPerformed(ActionEvent event)
-            {
-                newFrame.genWindow();
-            }
-        }
+
     }
 }

@@ -56,9 +56,10 @@ public class SubscribeFormPanel extends JPanel {
     public boolean isForeigner() {
         return foreigner.isSelected();
     }
-
-    public SubscribeFormPanel()
+    private MainPanel backUpPanel;
+    public SubscribeFormPanel(MainPanel mainPanel)
     {
+        backUpPanel=mainPanel;
         setLayout(new BorderLayout());
         JPanel centerPanel=new JPanel();
         add(centerPanel,BorderLayout.CENTER);
@@ -69,8 +70,18 @@ public class SubscribeFormPanel extends JPanel {
         JPanel southPanel=new JPanel();
         JButton backButton=new JButton("to main menu");
         JButton confirmButton=new JButton("confirm");
-        southPanel.add(backButton);
-        southPanel.add(confirmButton);
+        southPanel.setLayout(new GridBagLayout());
+        GridBagConstraints constraints=new GridBagConstraints();
+        constraints.gridy=0;
+        constraints.gridx=0;
+        constraints.gridwidth=2;
+        backButton.addActionListener(new ChangePanelListener(backUpPanel,backUpPanel.getContainer()));
+        southPanel.add(backButton,constraints);
+        constraints.gridx=3;
+        constraints.gridwidth=1;
+        constraints.insets=new Insets(2,10,0,0);
+        southPanel.add(confirmButton,constraints);
+
         add(southPanel,BorderLayout.SOUTH);
     }
 
@@ -110,9 +121,9 @@ public class SubscribeFormPanel extends JPanel {
             boursier=new JCheckBox("boursier");
             foreigner=new JCheckBox("foreigner");
 
-            setLayout(new GridLayout(8,2));
-
-
+            GridLayout layout=new  GridLayout(8,2);
+            setLayout(layout);
+            layout.setVgap(10);
             add(matriculeLabel);
             add(matricule);
             matricule.addActionListener(new matriculeListner());
